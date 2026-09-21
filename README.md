@@ -1,6 +1,6 @@
-# DWEC - 01 - Git y Github
+# Git y Github
 
-UD01. Sistema de Control de Versiones. DAM/DAW. Curso 2026-2027.
+UD01. Sistema de Control de Versiones. 2DAM/DAW. Curso 2026-2027.
 
 ![imagen](./img/git.png)
 

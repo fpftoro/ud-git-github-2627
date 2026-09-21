@@ -8,6 +8,7 @@
   - [Fase 4: Deshacer Commits (Borrando y Preservando Cambios)](#fase-4-deshacer-commits-borrando-y-preservando-cambios)
   - [Fase 5: Recuperación y Revertir](#fase-5-recuperación-y-revertir)
   - [Reflexión Final (Importancia de Git Local)](#reflexión-final-importancia-de-git-local)
+- [Qué entregar](#qué-entregar)
 
 
 ### Conceptos Clave a Introducir y Reforzar:
@@ -52,7 +53,7 @@
 | **3.2**  | **Prepara y confirma** el cambio: `git commit -am "chore: Añadida revisión de fecha"`                                         | Se utiliza `-am` para añadir archivos rastreados modificados y confirmar en un solo paso. <br>💡 El flag `-a` añade automáticamente archivos modificados (no nuevos) al staging antes de commitear. |
 | **3.3**  | **Visualiza el historial línea a línea** para `index.html`: `git blame index.html`                                            | **Blame/Annotate:** Muestra el commit, el autor y la fecha de la última modificación para cada línea del archivo. |
 | **3.4**  | **Equivocación en el Directorio de Trabajo:** Modifica `index.html` añadiendo una línea de prueba que **no quieres guardar**. |                                                                                                                   |
-| **3.5**  | **Descarta los cambios locales** (solución a la "cagada" sin preparar): `git restore index.html`                              | Deshace los cambios en el Directorio de trabajo, volviendo al estado del último commit.                           |
+| **3.5**  | **Descarta los cambios locales** (solución al error sin preparar): `git restore index.html`                              | Deshace los cambios en el Directorio de trabajo, volviendo al estado del último commit.                           |
 | **3.6**  | **Equivocación en el Área de Preparación:** Modifica `info.txt` y **prepáralo**: `git add info.txt`                           | El archivo está listo para el commit.                                                                             |
 | **3.7**  | **Desprepara los cambios** (saca del staging): `git restore --staged info.txt`                                                | Mueve el archivo del Área de preparación de vuelta al Directorio de trabajo, **manteniendo los cambios**.         |
 | **3.8**  | **Confirma la despreparación:** `git status`. El archivo `info.txt` debería estar modificado, pero sin preparar.              |                                                                                                                   |
@@ -95,5 +96,4 @@ El uso de un **Sistema de Control de Versiones (VCS)**, como Git, es una herrami
 
 - [ ] Captura de `git log --oneline --graph`
 - [ ] Captura de `git tag` y `git show v1.0-estable`
-- [ ] Todo ello en la carpeta de la UD1 en la carpeta correspondiente tareagit11. Lo harás inicialmente a través de la web de github.
-
+- [ ] Sube al directorio de la unidad tal y como indican las normas. Aquí podéis usar el interfaz web

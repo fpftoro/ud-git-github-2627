@@ -15,16 +15,14 @@
     - [4.3.3. Comentarios en Revisiones](#433-comentarios-en-revisiones)
     - [4.3.4. Ser un Buen Revisor](#434-ser-un-buen-revisor)
     - [4.3.5. Ser un Buen Autor](#435-ser-un-buen-autor)
-  - [4.4. GitHub Actions (CI/CD)](#44-github-actions-cicd)
-    - [4.4.1. Comandos para GitHub CLI](#441-comandos-para-github-cli)
-  - [4.5. Issues y Projects](#45-issues-y-projects)
-    - [4.5.1. Issues](#451-issues)
-    - [4.5.2. Projects](#452-projects)
-  - [4.6. Convenciones de Mensajes](#46-convenciones-de-mensajes)
-    - [4.6.1. Formato Convencional](#461-formato-convencional)
-    - [4.6.2. Tipos Comunes](#462-tipos-comunes)
-    - [4.6.3. Ejemplos](#463-ejemplos)
-  - [4.7. Resumen de Colaboración](#47-resumen-de-colaboración)
+  - [4.4. Issues y Projects](#44-issues-y-projects)
+    - [4.4.1. Issues](#441-issues)
+    - [4.4.2. Projects](#442-projects)
+  - [4.5. Convenciones de Mensajes](#45-convenciones-de-mensajes)
+    - [4.5.1. Formato Convencional](#451-formato-convencional)
+    - [4.5.2. Tipos Comunes](#452-tipos-comunes)
+    - [4.5.3. Ejemplos](#453-ejemplos)
+  - [4.6. Resumen de Colaboración](#46-resumen-de-colaboración)
 
 
 # 4. Colaboración
@@ -700,103 +698,14 @@ Cuando un PR modifica un archivo con un owner asignado, GitHub solicita revisió
 
 📌 **Ejemplo real:** En empresas como Microsoft, cada archivo del código fuente de VS Code tiene un CODEOWNERS asignado. Cuando alguien modifica el core, el equipo correspondiente recibe una notificación automática para revisar.
 
-## 4.4. GitHub Actions (CI/CD)
-
-> 💡 **Metáfora: CI/CD como "asistente automático que revisa tu trabajo"**
-> Imagina que cada vez que entregas un ejercicio, **un asistente** lo revisa al instante: comprueba que compila, que pasa los tests y que no hay errores de estilo. Si todo está bien, te pone un "Aprobado" automáticamente. Si hay errores, te dice exactamente dónde están. **GitHub Actions es ese asistente**.
-
-📌 **Ejemplo real:** Cuando haces un push a GitHub, ves una bolita verde o roja junto al commit. Esa bolita es GitHub Actions ejecutando los tests automáticamente.
-
-**Conceptos clave:**
-
-| Término | Significado |
-|---------|-------------|
-| **CI (Continuous Integration)** | Cada cambio se prueba automáticamente |
-| **CD (Continuous Delivery)** | El código se publica si pasa las pruebas |
-| **Workflow** | Archivo YAML que define qué hacer y cuándo |
-| **Trigger** | Evento que activa el workflow (push, PR, etc.) |
-
-**Ejemplo de workflow para .NET:**
-
-```yaml
-# .github/workflows/ci.yml
-name: CI Pipeline
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '10.0.x'
-    - run: dotnet restore
-    - run: dotnet build --no-restore
-    - run: dotnet test --no-build --verbosity normal
-```
-
-> ⚠️ **Errores comunes:** Indentación YAML incorrecta (YAML es sensible a espacios), olvidar `uses: actions/checkout@v4` (sin esto no tienes acceso al código), o versión de SDK incorrecta.
-
-### 4.4.1. Comandos para GitHub CLI
-
-```bash
-# Instalar GitHub CLI
-# https://cli.github.com/
-
-# Ver workflows
-gh workflow list
-
-# Ver runs de workflows
-gh run list
-
-# Ver logs de un run
-gh run view [run-id] --log
-
-# Re-ejecutar workflow
-gh run re-run [run-id]
-
-# Crear y gestionar PRs desde CLI
-gh pr create --title "feat: login" --body "Implementación..."
-gh pr list
-gh pr view [PR-number]
-gh pr checkout [PR-number]
-gh pr merge [PR-number]              # Merge commit (por defecto)
-gh pr merge [PR-number] --squash     # Squash and merge
-gh pr merge [PR-number] --rebase     # Rebase and merge
-gh pr review [PR-number] --approve   # Aprobar PR
-gh pr diff [PR-number]               # Ver cambios de la PR
-```
-
-```mermaid
-flowchart TD
-    A[Developer hace push] --> B[GitHub recibe push]
-    B --> C[Workflow se activa]
-    C --> D[Checkout del código]
-    D --> E[Setup .NET SDK]
-    E --> F[dotnet restore]
-    F --> G[dotnet build]
-    G --> H[dotnet test]
-    H --> I{¿Todos los tests<br/>pasan?}
-    I -->|Sí| J[Build exitoso - merge permitido]
-    I -->|No| K[Build fallido - arreglar código]
-
-    style J fill:#4CAF50,color:#fff
-    style K fill:#f44336,color:#fff
-```
-
-## 4.5. Issues y Projects
+## 4.4. Issues y Projects
 
 > 💡 **Metáfora: Issues como "la lista de la compra del proyecto"**
 > Imagina que vas al supermercado. Si no llevas lista, te olvidas de cosas, compras de más y vuelves con la bolsa medio vacía. Pero si llevas una **lista de la compra** bien organizada — *"leche, pan, huevos, tomates"* — sabes exactamente qué necesitas, qué ya tienes y qué te falta. **Las Issues son la lista de la compra de tu proyecto**: cada bug es un artículo, cada nueva funcionalidad es otro, y el tablero de Projects es la lista organizada por secciones (dairy, panadería, verduras...).
 
 📌 **Ejemplo real:** Cuando encuentras un bug en una app como Spotify, puedes ir a su repositorio de GitHub y crear un Issue: *"El botón de play no responde en Safari"*. Los desarrolladores lo revisan, lo clasifican (bug, feature, enhancement) y lo asignan a alguien del equipo.
 
-### 4.5.1. Issues
+### 4.4.1. Issues
 
 Los **issues** son para rastrear tareas, bugs y mejoras.
 
@@ -841,7 +750,7 @@ gh issue view [issue-number]
 | **Difícil de priorizar** | Sin un proceso claro, todas parecen urgentes |
 | **No sustituyen la comunicación** | Algunos problemas se resuelven mejor hablando directamente |
 
-### 4.5.2. Vincular Issues con PRs
+### 4.4.2. Vincular Issues con PRs
 
 Una de las funciones más útiles de GitHub es **cerrar automáticamente una Issue** cuando se mergea una PR que la resuelve. Para ello, usa palabras clave en la descripción de la PR o en el mensaje de commit:
 
@@ -894,7 +803,7 @@ flowchart LR
     style K fill:#4CAF50,color:#fff
 ```
 
-### 4.5.3. Projects
+### 4.4.3. Projects
 
 **GitHub Projects** es un tablero kanban para gestionar trabajo.
 
@@ -933,7 +842,7 @@ gh project item-add [project-number] --url [issue-url]
 
 📌 **Ejemplo real:** En equipos de desarrollo de Telefónica, cada sprint se gestiona con GitHub Projects. Las Issues se mueven automáticamente a "Done" cuando el PR asociado se mergea.
 
-## 4.6. Convenciones de Mensajes
+## 4.5. Convenciones de Mensajes
 
 > 💡 **Metáfora: Conventional Commits como "etiquetas en las cajas de una tienda"**
 > Imagina que vas a un supermercado y todas las cajas son idénticas, sin etiquetas. No sabes cuál contiene leche, cuál contiene cereales y cuál contiene detergentes. Tendrías que abrir cada caja para saber qué hay dentro. **¡Un caos!** Ahora imagina que cada caja tiene una etiqueta clara: 🥛 "Leche", 🥣 "Cereales", 🧴 "Detergente". **Los convencional commits son esas etiquetas**: cada commit lleva una etiqueta que indica qué tipo de cambio es (`feat`, `fix`, `docs`...), para que al mirar el historial sepas exactamente qué hace cada commit sin tener que leer el código completo.
@@ -946,7 +855,7 @@ docs(readme): update installation guide
 ```
 Esto permite generar changelogs automáticos y saber en qué versión se introdujo cada cambio.
 
-### 4.6.1. Formato Convencional
+### 4.5.1. Formato Convencional
 
 ```
 <tipo>(<ámbito>): <descripción>
@@ -970,7 +879,7 @@ graph TD
     style F fill:#607D8B,color:#fff
 ```
 
-### 4.6.2. Tipos Comunes
+### 4.5.2. Tipos Comunes
 
 | Tipo | Descripción | Ejemplo |
 |------|-------------|---------|
@@ -982,7 +891,7 @@ graph TD
 | **test** | Añadir tests | `test: add unit tests` |
 | **chore** | Tareas de mantenimiento | `chore: update deps` |
 
-### 4.6.3. Ejemplos
+### 4.5.3. Ejemplos
 
 ```bash
 # ❌ Malos mensajes
@@ -1025,7 +934,7 @@ git commit -m "docs(api): add endpoint documentation"
 >
 > 4. **Descripciones en inglés malo**: Si el equipo habla español, usa español. Pero si es open source, el inglés es estándar.
 
-## 4.7. Resumen de Colaboración
+## 4.6. Resumen de Colaboración
 
 ```bash
 # Pull Request
